@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gửi Tiết Kiệm Online - Lãi Suất Tốt Nhất</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'SF Pro Display', sans-serif;
+}
+
+body {
+background: #fff;
+color: #1d1d1f;
+line-height: 1.5;
+overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+
+.youtube-bg {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 100vw;
+height: 100vh;
+transform: translate(-50%, -50%);
+z-index: 0;
+pointer-events: none;
+opacity: 1; /* Bỏ lớp mờ */
+}
+
+.hero h1 {
+font-size: 4rem;
+font-weight: 700;
+margin-bottom: 20px;
+opacity: 0;
+transform: translateY(50px);
+color: #fff; /* Giữ trắng để nổi trên video */
+text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); /* Đậm shadow hơn */
+position: relative;
+z-index: 1;
+}
+
+.hero p {
+font-size: 1.5rem;
+max-width: 600px;
+margin-bottom: 40px;
+opacity: 0;
+transform: translateY(50px);
+color: #fff;
+text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+position: relative;
+z-index: 1;
+}
+
+.cta-btn {
+padding: 15px 40px;
+font-size: 1.2rem;
+background: #0071e3;
+color: #fff;
+border: none;
+border-radius: 25px;
+cursor: pointer;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+opacity: 0;
+transform: translateY(50px);
+position: relative;
+z-index: 1;
+}
+
+.cta-btn:hover {
+transform: scale(1.05);
+box-shadow: 0 10px 20px rgba(0, 113, 227, 0.3);
+}
+
+/* Features Section */
+.features {
+padding: 100px 20px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 40px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.feature-card {
+text-align: center;
+padding: 40px;
+background: #fff;
+border-radius: 20px;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+transform: translateY(100px);
+opacity: 0;
+transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+transform: translateY(-10px);
+}
+
+.feature-card h3 {
+font-size: 1.8rem;
+margin-bottom: 10px;
+}
+
+/* Savings Plans Carousel */
+.savings-plans {
+padding: 100px 20px;
+background: #f5f5f7;
+}
+
+.savings-plans h2 {
+text-align: center;
+font-size: 2.5rem;
+margin-bottom: 50px;
+}
+
+.swiper {
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.swiper-slide {
+background: #fff;
+border-radius: 20px;
+padding: 40px;
+text-align: center;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+transform: scale(0.9);
+transition: transform 0.3s ease;
+}
+
+.swiper-slide-active {
+transform: scale(1);
+}
+
+.swiper-slide h3 {
+font-size: 1.8rem;
+margin-bottom: 10px;
+}
+
+.swiper-slide p {
+font-size: 1.2rem;
+color: #6e6e73;
+}
+
+.swiper-slide .cta-btn {
+margin-top: 20px;
+opacity: 1;
+transform: none;
+}
+
+/* Calculator Section */
+.calculator {
+padding: 100px 20px;
+max-width: 1000px;
+margin: 0 auto;
+text-align: center;
+}
+
+.calculator h2 {
+font-size: 2.5rem;
+margin-bottom: 40px;
+}
+
+.calculator form {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+justify-content: center;
+align-items: center;
+}
+
+.calculator input, .calculator select {
+padding: 15px;
+font-size: 1.2rem;
+width: 100%;
+max-width: 300px;
+border: 1px solid #d2d2d7;
+border-radius: 10px;
+outline: none;
+transition: border-color 0.3s ease;
+}
+
+.calculator input:focus, .calculator select:focus {
+border-color: #0071e3;
+}
+
+.calculator .result {
+margin-top: 40px;
+font-size: 1.5rem;
+color: #0071e3;
+opacity: 0;
+}
+
+/* Chart */
+.chart-container {
+margin-top: 50px;
+max-width: 600px;
+margin-left: auto;
+margin-right: auto;
+opacity: 0;
+}
+
+/* History Section */
+.history {
+margin-top: 50px;
+text-align: center;
+}
+
+.history h3 {
+font-size: 1.8rem;
+margin-bottom: 20px;
+}
+
+.history-list {
+list-style: none;
+max-width: 600px;
+margin: 0 auto;
+opacity: 0;
+}
+
+.history-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px;
+background: #f5f5f7;
+border-radius: 10px;
+margin-bottom: 10px;
+}
+
+.history-item button {
+background: #ff2d55;
+color: #fff;
+border: none;
+padding: 5px 10px;
+border-radius: 5px;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+.history-item button:hover {
+background: #cc2444;
+}
+
+/* Comparison Section */
+.comparison {
+padding: 100px 20px;
+background: #fff;
+text-align: center;
+}
+
+.comparison h2 {
+font-size: 2.5rem;
+margin-bottom: 40px;
+}
+
+.comparison-table {
+max-width: 1000px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+opacity: 0;
+}
+
+.comparison-card {
+padding: 20px;
+background: #f5f5f7;
+border-radius: 10px;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-card h3 {
+font-size: 1.5rem;
+margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+padding: 50px 20px;
+text-align: center;
+background: #f5f5f7;
+color: #6e6e73;
+}
+
+footer a {
+color: #0071e3;
+text-decoration: none;
+font-size: 1.2rem;
+transition: color 0.3s ease;
+}
+
+footer a:hover {
+color: #005bb5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+.hero h1 { font-size: 2.5rem; }
+.hero p { font-size: 1.2rem; }
+.features, .savings-plans, .calculator, .comparison { padding: 50px 10px; }
+.swiper-slide { padding: 20px; }
+.calculator form { flex-direction: column; }
+.comparison-table { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<!-- Hero Section -->
+<section class="hero">
+<iframe class="youtube-bg" src="https://www.youtube.com/embed/BIKa2DLnz30?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=BIKa2DLnz30" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<h1>Gửi Tiết Kiệm Online</h1>
+<p>Lãi suất tốt nhất thị trường - An toàn, tiện lợi, tối ưu tài chính của bạn.</p>
+<button class="cta-btn">Bắt Đầu Ngay</button>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+<div class="feature-card">
+<h3>Lãi Suất Cao</h3>
+<p>Nhận lãi suất cạnh tranh, tối đa hóa lợi nhuận của bạn.</p>
+</div>
+<div class="feature-card">
+<h3>An Toàn Tuyệt Đối</h3>
+<p>Dữ liệu được mã hóa, bảo vệ tài sản của bạn 24/7.</p>
+</div>
+<div class="feature-card">
+<h3>Quản Lý Dễ Dàng</h3>
+<p>Theo dõi và quản lý tài khoản mọi lúc, mọi nơi.</p>
+</div>
+</section>
+
+<!-- Savings Plans Carousel -->
+<section class="savings-plans">
+<h2>Các Gói Tiết Kiệm</h2>
+<div class="swiper">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<h3>Gói 6 Tháng</h3>
+<p>Lãi suất: 5.5%/năm<br>Số tiền tối thiểu: 10 triệu</p>
+<button class="cta-btn">Đăng Ký Ngay</button>
+</div>
+<div class="swiper-slide">
+<h3>Gói 12 Tháng</h3>
+<p>Lãi suất: 6.8%/năm<br>Số tiền tối thiểu: 20 triệu</p>
+<button class="cta-btn">Đăng Ký Ngay</button>
+</div>
+<div class="swiper-slide">
+<h3>Gói 24 Tháng</h3>
+<p>Lãi suất: 7.2%/năm<br>Số tiền tối thiểu: 50 triệu</p>
+<button class="cta-btn">Đăng Ký Ngay</button>
+</div>
+</div>
+<div class="swiper-pagination"></div>
+<div class="swiper-button-next"></div>
+<div class="swiper-button-prev"></div>
+</div>
+</section>
+
+<!-- Calculator Section -->
+<section class="calculator">
+<h2>Tính Toán Lãi Suất</h2>
+<form id="calc-form">
+<input type="number" id="amount" placeholder="Nhập số tiền (VNĐ)" required>
+<input type="number" id="months" placeholder="Nhập số tháng" required>
+<select id="rate" required>
+<option value="" disabled selected>Chọn lãi suất</option>
+<option value="0.055">5.5% (6 tháng)</option>
+<option value="0.068">6.8% (12 tháng)</option>
+<option value="0.072">7.2% (24 tháng)</option>
+</select>
+<button type="submit" class="cta-btn">Tính Ngay</button>
+</form>
+<div class="result" id="result"></div>
+<div class="chart-container">
+<canvas id="interestChart"></canvas>
+</div>
+<!-- History Section -->
+<div class="history">
+<h3>Lịch Sử Tính Toán</h3>
+<ul class="history-list" id="history-list"></ul>
+</div>
+</section>
+
+<!-- Comparison Section -->
+<section class="comparison">
+<h2>So Sánh Gói Tiết Kiệm</h2>
+<div class="comparison-table">
+<div class="comparison-card">
+<h3>6 Tháng</h3>
+<p>Lãi suất: 5.5%/năm<br>Tiền lãi 1 tỷ: 27,500,000 VNĐ</p>
+</div>
+<div class="comparison-card">
+<h3>12 Tháng</h3>
+<p>Lãi suất: 6.8%/năm<br>Tiền lãi 1 tỷ: 68,000,000 VNĐ</p>
+</div>
+<div class="comparison-card">
+<h3>24 Tháng</h3>
+<p>Lãi suất: 7.2%/năm<br>Tiền lãi 1 tỷ: 144,000,000 VNĐ</p>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<p>Liên hệ: <a href="tel:0899499999">0899499999</a> - Huỳnh Gia Ngọc Mỹ</p>
+</footer>
+
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// GSAP Animations
+gsap.to(".hero h1", { opacity: 1, y: 0, duration: 1, delay: 0.5 });
+gsap.to(".hero p", { opacity: 1, y: 0, duration: 1, delay: 0.8 });
+gsap.to(".cta-btn", { opacity: 1, y: 0, duration: 1, delay: 1.1 });
+
+gsap.utils.toArray(".feature-card").forEach((card, i) => {
+gsap.to(card, {
+opacity: 1,
+y: 0,
+duration: 1,
+delay: i * 0.3,
+scrollTrigger: { trigger: card, start: "top 80%" }
+});
+});
+
+gsap.to(".comparison-table", {
+opacity: 1,
+duration: 1,
+scrollTrigger: { trigger: ".comparison", start: "top 80%" }
+});
+
+// Swiper Carousel
+const swiper = new Swiper('.swiper', {
+slidesPerView: 1,
+spaceBetween: 30,
+centeredSlides: true,
+loop: true,
+pagination: { el: '.swiper-pagination', clickable: true },
+navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+breakpoints: { 768: { slidesPerView: 3 } }
+});
+
+// Calculator Logic with History
+let chartInstance = null;
+const historyList = document.getElementById('history-list');
+let history = JSON.parse(localStorage.getItem('calcHistory')) || [];
+
+function renderHistory() {
+historyList.innerHTML = '';
+history.forEach((item, index) => {
+const li = document.createElement('li');
+li.className = 'history-item';
+li.innerHTML = `${item.text} <button onclick="deleteHistory(${index})">Xóa</button>`;
+historyList.appendChild(li);
+});
+gsap.to('.history-list', { opacity: 1, duration: 1 });
+}
+
+function deleteHistory(index) {
+history.splice(index, 1);
+localStorage.setItem('calcHistory', JSON.stringify(history));
+renderHistory();
+}
+
+document.getElementById('calc-form').addEventListener('submit', (e) => {
+e.preventDefault();
+const amount = parseFloat(document.getElementById('amount').value);
+const months = parseInt(document.getElementById('months').value);
+const rate = parseFloat(document.getElementById('rate').value);
+
+const interest = (amount * rate * months) / 12;
+const total = amount + interest;
+
+const resultEl = document.getElementById('result');
+const resultText = `Lãi: ${interest.toLocaleString('vi-VN')} VNĐ | Tổng: ${total.toLocaleString('vi-VN')} VNĐ`;
+resultEl.textContent = resultText;
+gsap.to(resultEl, { opacity: 1, duration: 1 });
+
+// Add to history
+history.push({ text: `${amount.toLocaleString('vi-VN')} VNĐ, ${months} tháng, ${rate * 100}%: ${resultText}` });
+localStorage.setItem('calcHistory', JSON.stringify(history));
+renderHistory();
+
+// Chart
+const ctx = document.getElementById('interestChart').getContext('2d');
+if (chartInstance) chartInstance.destroy();
+chartInstance = new Chart(ctx, {
+type: 'pie',
+data: {
+labels: ['Gốc', 'Lãi'],
+datasets: [{
+data: [amount, interest],
+backgroundColor: ['#d2d2d7', '#0071e3'],
+borderWidth: 0
+}]
+},
+options: {
+animation: { duration: 1000 },
+plugins: { legend: { position: 'bottom' } }
+}
+});
+gsap.to('.chart-container', { opacity: 1, duration: 1 });
+});
+
+// Initial render of history
+renderHistory();
+</script>
+</body>
+</html>
